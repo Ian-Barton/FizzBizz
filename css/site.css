@@ -65,3 +65,6 @@ word-wrap: break-word;
 .colBG2 {
     background-color: #cecece
 }
+.line-numbers {
+    text-align: left;
+}

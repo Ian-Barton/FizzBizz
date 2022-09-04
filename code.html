@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: Mini Site Js Project</title>
+    <title>Fizz Bizz: A Js Project</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,7 +21,7 @@
 <!--Nav Section-->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/logo.png" class="d-inline-block align-text-top" width="30">App Name</a>
+        <a class="navbar-brand" href="#"><img src="img/logo.png" class="d-inline-block align-text-top" width="30">Fizz Bizz</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,19 +55,115 @@
     <div class="container py-5 px-5 mt-5">
         <h2 class="border-1 border-bottom border-dark">The Code</h2>
         <div class="row row-cols-1 row-cols-lg-2">
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <pre class="line-numbers">
                     <code class="language-javascript">
-                        function HelloWorld() {
-                            alert("Hello World");
-                        }
+function getValues() {
+    document.getElementById("results").innerHTML = "";
+    let start = parseInt(document.getElementById("startValue").value);
+    let end = parseInt(document.getElementById("endValue").value);
+    getLogic(start, end);
+}
+function getLogic(start, end) {
+    let rowTemplate = "";
+    let rows = 0;
+    let bg_style = `colBG1`
+    for (let i = start; i <= end; i++) {
+        rows++;
+        if(i % 3 == 0 && i % 5 == 0) {
+            rowTemplate += `<div class="col-2 px-2 ${bg_style}">Fizz Bizz</div>`
+        }
+        else {
+            if(i % 3 == 0) {
+                rowTemplate += `<div class="col-2 px-2 ${bg_style}">Fizz</div>` 
+            }
+            else if(i % 5 == 0) {
+                rowTemplate += `<div class="col-2 px-2 ${bg_style}">Bizz</div>`
+            }
+            else {
+                rowTemplate += `<div class="col-2 px-2 ${bg_style}">${i}</div>`
+            }
+        }
+        if (rows % 10 == 0) {
+            bg_style = `colBG1`;
+        }
+        else if (rows % 5 == 0){
+            bg_style = `colBG2`;
+        }
+    }
+    document.getElementById("results").innerHTML += rowTemplate;
+}
+function display() {
+
+}
                     </code>
                 </pre>
             </div>
-            <div class="col-lg-4">
-                <p>The Code is structed in one Function.</p>
-                <h5>Hello World.</h5>
-                <p>Hello World is a Function that displays an Alert that contains the message "Hello Wolrd."</p>
+            <div class="col-lg-6">
+                <pre class="line-numbers">
+                    <code class="language-javascript">
+function getValues() {
+    let fizz = document.getElementById("fizzValue").value;
+    let buzz = document.getElementById("buzzValue").value;
+    fizz = parseInt(fizz);
+    buzz = parseInt(buzz);
+
+    if (Number.isInteger(fizz) && Number.isInteger(buzz)) {
+        let fbArray = fizzBuzz(fizz, buzz);
+        display(fbArray);
+    }else{
+        alert("You must enter integers only.");
+    }
+}
+
+function fizzBuzz(fizz, buzz) {
+    let returnArray = [];
+    for(let i = 1; i <= 100; i++) {
+        if (i % fizz == 0 && i % buzz == 0) {
+            returnArray.push("FizzBuzz");
+        }else if (i % fizz == 0){
+            returnArray.push("Fizz");
+        }else if (i % buzz == 0){
+            returnArray.push("Buzz");
+        }else {
+            returnArray.push(i);
+        }
+    }
+    return returnArray;
+}
+
+function display(fbArray) {
+    let tableBody = document.getElementById("results");
+
+    let rowTemplate = document.getElementById("fbTemplate");
+
+    tableBody.innerHTML = "";
+
+    for (let i = 0; i < fbArray.length; i += 5) {
+        let tableRow = document.importNode(rowTemplate.content, true);
+        let rowCols = tableRow.querySelectorAll("td");
+        rowCols[0].textContent = fbArray[i];
+        rowCols[1].textContent = fbArray[i + 1];
+        rowCols[2].textContent = fbArray[i + 2];
+        rowCols[3].textContent = fbArray[i + 3];
+        rowCols[4].textContent = fbArray[i + 4];
+        tableBody.appendChild(tableRow);
+    }
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col-lg-6">
+                <p>The Code is structed in two Functions.</p>
+                <h5>My Version.</h5>
+                <p>My version uses divs. I get the values of the input and make them the start and the end of the display. Every time the number is a numerator of 3 I say "Fizz", every time the number is a numerator of 5 I say "Bizz", and every time the it's a numerator of both I say "FizzBizz." I call it Fizz Bizz instead of Fizz Buzz because I wanted it to feel more like my own project, since I would be attempting to complete it without watching the tutorial. Despite not using tables I managed to make the lines change color as if they were table rows. I did this by making each column a string and inserting a changing variable where the class for the div would be. I also didn't use all three functions.</p>
+            </div>
+            <div class="col-lg-6">
+                <p>The Code is structed in three Functions.</p>
+                <h5>Boot Camp Version.</h5>
+                <p>This version takes the two inputs and instead of making them the start and the end, these set the Fizz and Buzz numerators. I made mine's different because I misinterpreted the instructions the first time around. Here the start is 1 and the end is 100. This one uses a table template and fills it out using entries that were stored in an array using a For Loop.</p>
             </div>
         </div>
     </div>
